@@ -20,49 +20,15 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import { Avatar } from '@mui/material';
 import profileImg from  '../images/profile-picture.jpg';
+import { useThemeContext } from '../theme/ThemeContextProvider';
 
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
 
 export default function Navbar() {
+
+  const { mode, toggleColorMode } = useThemeContext();  
+  console.log("mode",mode);
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -86,6 +52,17 @@ export default function Navbar() {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+
+  const toggleFullscreen=()=> {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -159,9 +136,11 @@ export default function Navbar() {
     </Menu>
   );
 
+
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{bgcolor:"white"}}>
+      <AppBar position="static" sx={{bgcolor:(mode === 'dark' ? "#303134"  : "white")}}>
         <Toolbar>
           {/* <IconButton
             size="large"
@@ -176,7 +155,7 @@ export default function Navbar() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' ,color:"black"} }}
+            sx={{ display: { xs: 'none', sm: 'block' ,color:(mode === 'light' ? "#303134"  : "white")} }}
           >
             Balboa Reviewer
           </Typography>
@@ -184,24 +163,24 @@ export default function Navbar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton 
-            size="large"
+            size="large"            
              aria-label="show 4 new mails"
               color="default"
-            
-            
+              // sx={{bgcolor:"#EBEEF6",":hover ":{bgcolor:"#EBEEF6"}}}
+              onClick={toggleColorMode}
             >
           
-                <DarkModeIcon/>
-                {/* <LightModeIcon/> */}
-            
+          {mode === "dark" ? <LightModeIcon sx={{color:"#EBEEF6"}}/> : <DarkModeIcon sx={{color:"#303134"}}/>}
+                
             </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="default"
-            >
+              onClick={toggleFullscreen}
+>
 
-<FullscreenIcon/>
+<FullscreenIcon sx={{color:(mode === 'light' ? "#303134"  : "white")}}/>
             </IconButton>
             <IconButton
               size="large"
