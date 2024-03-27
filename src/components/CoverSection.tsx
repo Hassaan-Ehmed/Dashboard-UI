@@ -12,7 +12,7 @@ function CoverSection() {
 
    <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
     
-    <div style={{width:"98%",height:"50vh",marginTop:"10px",boxShadow:"0px 3px 20px -11px",display:"flex",flexDirection:"column",justifyContent:"space-between",alignItems:"center",backgroundColor:(mode === 'dark' ? "#303134"  : "white"),paddingTop:"30px"}} >
+    <div style={{width:"98%",height:"50vh",marginTop:"10px",boxShadow:"0px 3px 20px -11px",display:"flex",flexDirection:"column",justifyContent:"space-between",alignItems:"center",backgroundColor:(mode === 'dark' ? "#303134"  : "white"),paddingTop:"30px",borderRadius:"5px"}} >
       
 
 <div style={{width:"97%",backgroundColor:"black", height:"60%",display:"flex", flexDirection:"column",justifyContent:"center",gap:"10px"}}>

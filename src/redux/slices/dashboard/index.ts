@@ -5,6 +5,7 @@ import { saveDataToLocalStorgae } from "../../../utils/LocalStorage";
 
 const initialState = {
     isEditable:false,
+    inputFieldsData:listing,
     data:listing
 }
 
@@ -27,15 +28,22 @@ const dashboardSlice = createSlice({
         },
 
         setDataToStore:(state:any,action:any)=>{
+            
+            // alert("Helloooo Setting Data!")
+            // console.log("When i typing...",action?.payload);
 
-            state.data = action?.payload
+            state.inputFieldsData = action?.payload
         },
         
         saveInformation:(state:any)=>{
-         
-            saveDataToLocalStorgae("information",state?.data ?? []);
+
+            alert(state.inputFieldsData);
+            
+            saveDataToLocalStorgae("information",state?.inputFieldsData);
             state.isEditable = false
-        }
+        },
+
+    
     }
 });
 

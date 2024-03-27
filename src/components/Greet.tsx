@@ -5,9 +5,9 @@ function Greet() {
   const { mode, toggleColorMode } = useThemeContext();
   
   return (
-   <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
+   <div style={{width:"100%",display:"flex",justifyContent:"center",alignItems:"center",marginTop:"90px"}}>
 
-<div style={{width:"98%",height:"10vh",marginTop:"10px",boxShadow:"0px 3px 20px -11px",display:"flex",justifyContent:"space-between",alignItems:"center",backgroundColor:(mode === 'dark' ? "#303134"  : "white")}} >
+<div style={{width:"98%",height:"10vh",marginTop:"10px",boxShadow:"0px 3px 20px -11px",display:"flex",justifyContent:"space-between",alignItems:"center",backgroundColor:(mode === 'dark' ? "#303134"  : "white"),borderRadius:"5px"}} >
       
 
       <div style={{width:"10%", height:"100%",display:"flex", flexDirection:"column",justifyContent:"center",gap:"10px",marginLeft:"20px"}}>
@@ -16,7 +16,7 @@ function Greet() {
       </div>
       
       <div style={{width:"7%", height:"fit-content",textAlign:"center",marginRight:"20px",}}>
-      <p style={{fontSize:"1vw",color:"lightgrey"}}>Back / Profile</p>
+      <p style={{fontSize:"1vw",color:"lightgrey"}}>Profile</p>
       </div>
             
           </div>

@@ -10,40 +10,43 @@ import Form from './components/Form';
 import Sidebar from './components/Sidebar';
 import { useThemeContext } from './theme/ThemeContextProvider';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
-import { getDataFromLocalStorage } from './utils/LocalStorage';
+import { store, useAppDispatch } from './redux/store';
+import { getDataFromLocalStorage, saveDataToLocalStorgae } from './utils/LocalStorage';
 import { setDataToStore } from './redux/slices/dashboard';
+import { listing } from './data/data';
+
+
 
 function App() {
 
   const { theme } = useThemeContext();
-
-  useEffect(()=>{
-
-const data:any = getDataFromLocalStorage("information");
-
-if(data){
-  setDataToStore(data);
-}
-  },[])
+  const dispatch  = useAppDispatch();
 
   return (
   //  <Grid container sx={{width:"100%",height:"100vh"}}>
   //  </Grid>
   <ThemeProvider theme={theme}>
 
-<Provider store={store}>
+
 
 <CssBaseline/>
+<Grid container>
+
+<Grid item xl={2} lg={2} md={2} sm={2} xs={2}>
+<Sidebar/>
+</Grid>
+<Grid item xl={10} lg={10} md={10} sm={9} xs={9}>
+
  <Navbar/>
   <Greet/>
   <ActionBtn/>
   <CoverSection/>
   <Form/>
+</Grid>
   
+</Grid>
 
-  
-</Provider>
+{/* <SelectTextFields/> */}
   </ThemeProvider>
   )
 }
