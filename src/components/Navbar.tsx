@@ -65,30 +65,14 @@ export default function Navbar() {
   }
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
+
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
+    sx={{"& .css-6hp17o-MuiList-root-MuiMenu-list":{
+      bgcolor:`${ mode ===  "dark" && "#434446"}`
+    }}}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: 'top',
@@ -102,25 +86,20 @@ export default function Navbar() {
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          
-            {/* <MailIcon   /> */}
-           </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={toggleColorMode} >
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
-        >
-            <NotificationsIcon />
-         
+      >
+      
+      {mode === "dark" ? <LightModeIcon /> : <DarkModeIcon sx={{color:"#303134"}}/>}
+
         </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+    <p style={{color:(mode === 'dark' ? "white"  : "black")}}>{`${ mode ===  "light" ? "Dark Mode"  : "Light Mode"}`}</p>
+            </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -128,10 +107,12 @@ export default function Navbar() {
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
+          onClick={toggleFullscreen}
         >
-          <AccountCircle />
+        <FullscreenIcon sx={{color:(mode === 'light' ? "#303134"  : "white")}}/>
+
         </IconButton>
-        <p>Profile</p>
+        <p style={{color:(mode === 'dark' ? "white"  : "black")}}>Full Screen</p>
       </MenuItem>
     </Menu>
   );
@@ -170,8 +151,7 @@ export default function Navbar() {
               onClick={toggleColorMode}
             >
           
-          {mode === "dark" ? <LightModeIcon sx={{color:"#EBEEF6"}}/> : <DarkModeIcon sx={{color:"#303134"}}/>}
-                
+          {mode === "dark" ? <LightModeIcon sx={{color:"#EBEEF6"}}/> : <DarkModeIcon sx={{color:"#303134"}}/>}                
             </IconButton>
             <IconButton
               size="large"
@@ -180,8 +160,7 @@ export default function Navbar() {
               onClick={toggleFullscreen}
 >
 
-<FullscreenIcon sx={{color:(mode === 'light' ? "#303134"  : "white")}}/>
-            </IconButton>
+<FullscreenIcon sx={{color:(mode === 'light' ? "#303134"  : "white")}}/>            </IconButton>
             <IconButton
               size="large"
               edge="end"
@@ -210,7 +189,6 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
     </Box>
   );
 }

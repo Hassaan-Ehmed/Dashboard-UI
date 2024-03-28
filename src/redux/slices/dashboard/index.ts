@@ -29,15 +29,11 @@ const dashboardSlice = createSlice({
 
         setDataToStore:(state:any,action:any)=>{
             
-            // alert("Helloooo Setting Data!")
-            // console.log("When i typing...",action?.payload);
-
             state.inputFieldsData = action?.payload
         },
         
         saveInformation:(state:any)=>{
 
-            alert(state.inputFieldsData);
             
             saveDataToLocalStorgae("information",state?.inputFieldsData);
             state.isEditable = false

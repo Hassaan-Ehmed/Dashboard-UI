@@ -35,7 +35,7 @@ function App() {
 <Grid item xl={2} lg={2} md={2} sm={2} xs={2}>
 <Sidebar/>
 </Grid>
-<Grid item xl={10} lg={10} md={10} sm={9} xs={9}>
+<Grid item xl={10} lg={10} md={10} sm={10} xs={10}>
 
  <Navbar/>
   <Greet/>

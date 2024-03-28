@@ -13,8 +13,8 @@ import { useThemeContext } from '../theme/ThemeContextProvider';
 const SideList=({text,Icon,select}:any)=>{
       
     return <div style={{width:"90%",height:"20%",backgroundColor:`${select ? "#FFD9AE" : ""}` ,borderRadius:"5px",display:"flex",justifyContent:"flex-start",alignItems:"center",gap:"4vh",cursor:"pointer"}}>  
-     <Icon sx={{fontSize:"1.5vw",marginLeft:"1.5vh",color:`${select ? "#A61B30" : "white"}`}}/>
-     <p style={{fontSize:".8vw",color:`${select ? "#A61B30" : "white"}`}}>{text}</p>
+     <Icon sx={{fontSize:"3vh",marginLeft:"1.5vw",color:`${select ? "#A61B30" : "white"}`}}/>
+     <p style={{fontSize:"1.6vh",color:`${select ? "#A61B30" : "white"}`}}>{text}</p>
        </div>
    }
 export default function Sidebar(props: any) {

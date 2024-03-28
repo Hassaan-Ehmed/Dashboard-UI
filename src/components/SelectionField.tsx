@@ -18,17 +18,18 @@ export default function SelectionField({listOfSelection,idX,handleChange,title="
     >
       <div>
         <TextField
-          id="filled-select-currency"
+
+          id="outlined-select-currency"
           select
           label="Select"
-          defaultValue="EUR"
-          variant="filled"
-          sx={{bgcolor:"#EBEEF6",color:"black"}}
+          defaultValue={listOfSelection[0]}
+          // variant="filled"
+          sx={{color:"black"}}
 
         //   onChange={()=>handleChange(idX,'secondaryText')}
         >
-          {listOfSelection.map((option:any) => (
-            <MenuItem key={option.value} value={option.value} sx={{bgcolor:"#EBEEF6",color:"black"}}
+          {listOfSelection.map((option:any,indexNum:number) => (
+            <MenuItem key={indexNum} value={option.value} sx={{bgcolor:"#EBEEF6",color:"black"}}
             onClick={()=>handleChange(idX,"secondaryText",option.value,title)} >
               {option.value}
             </MenuItem>

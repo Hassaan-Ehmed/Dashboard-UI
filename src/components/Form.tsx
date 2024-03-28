@@ -16,20 +16,10 @@ function Form() {
   const { mode, toggleColorMode } = useThemeContext();
   const storeState = useAppSelector(state =>state.dashboard);
   const dispatch  = useAppDispatch();
-  
-// const [state,setState]  = useReducer((state:any,newState:any)=>{
-// return {...state,newState}
-// },
-
-// {
-//   email2:""
-
-// }
-
-// )
 
 const [data, setData] = useState(storeState.inputFieldsData);
-const [country, setCountry] = useState("Pakistan");
+const [countryCity, setCountryCity] = useState(cities.Pakistan);
+const [date,setDate] = useState(`${new Date().getMonth()+1}-${new Date().getDate()}-${new Date().getFullYear()}`);
 
 React.useEffect(()=>{
 
@@ -56,12 +46,15 @@ React.useEffect(()=>{
 
 const handleChange = (index:number, key:any, value:any,title="") => {
 
+  
   if( title === "Country"){
 
-    setCountry(value);
-    
-  }
-  // console.log("Typed Data",value);
+let copy_cities:any =  {...cities};
+
+setCountryCity(copy_cities[value]);   
+
+
+}
   setData((prevData:any) => {
     const newData:any = [...prevData]; // Create a shallow copy of the array
     newData[index] = { ...newData[index], [key]: value }; // Update the specific object immutably
@@ -70,54 +63,44 @@ const handleChange = (index:number, key:any, value:any,title="") => {
 
 };
 
-console.log('Updated Data:', data);
+// console.log('Updated Data:', data);
 
 const DateField=(idX:any)=>{
   
   return (<>
   
-          <label       
-                style={{
-                  backgroundColor:"white",
-                  position:"absolute",
-                  zIndex:2,
-                  top:"7px",
-                  left:"26px",
-                  fontSize:"1.3vh",
-                  color:"gray"
-                  
-                }}
-                >Date From</label>
                
                 <input
                   type="date"
                   // max={state?.dateTo}
-                  
+                  value={date}
                   // min={`${new Date().getFullYear()}-0${new Date().getMonth()+1}-${new Date().getDate()}`}
                   style={{
                     width: "48%",
                     height: "50%",
-                    padding:".6vw 0",
+                    padding:".7vw 0",
+                    backgroundColor:`${mode === "dark" && "transparent" }`,
+                    color:`${mode === "dark" && "white" }`,
                     cursor: "pointer",
                     borderRadius: "5px",
                     position:"relative",
                     border: "1px solid #bcbaba",
                   }}
                   
-                  onChange={ e=> handleChange(idX, 'secondaryText', e.target.value)}
+                  onChange={ (e:any)=> {handleChange(idX, 'secondaryText', e.target.value);setDate(e.target.value)}}
                   
                   />
   </>)
 }
 
-const ListItems=(title:string,subText:string,idX:number,country:any)=>{
+const ListItems=(title:string,subText:string,idX:number,)=>{
   
   return (
 
     <ListItem sx={{width:"100%",height:"auto",marginTop:`${'5px'}`}}>
             <ListItemText primary={<p style={{fontWeight:"600",marginLeft:"10px"}}>{title}</p>} secondary={
               storeState.isEditable ? 
-              (title === "Gender" ? <SelectionField listOfSelection={genders} idX={idX} handleChange={handleChange}/> : title === "Country" ? <SelectionField listOfSelection={countries} idX={idX} handleChange={handleChange} title={title} /> : title === "City" ? <SelectionField listOfSelection={cities?.Pakistan} idX={idX} handleChange={handleChange}/> : title === "Date of Birth"  ? <DateField  idX={idX}/> : title !== "" && <TextField
+              (title === "Gender" ? <SelectionField listOfSelection={genders} idX={idX} handleChange={handleChange}/> : title === "Country" ? <SelectionField listOfSelection={countries} idX={idX} handleChange={handleChange} title={title} /> : title === "City" ? <SelectionField listOfSelection={countryCity} idX={idX} handleChange={handleChange}/> : title === "Date of Birth"  ? <DateField  idX={idX}/> : title !== "" && <TextField
               id="outlined-size-small"
               defaultValue={subText}
               size="small"
@@ -125,10 +108,9 @@ const ListItems=(title:string,subText:string,idX:number,country:any)=>{
               onChange={e => handleChange(idX, 'secondaryText', e.target.value)}
               />)
               :
-              (
-                <p style={{fontSize:"1vw",color:"lightgray",marginLeft:"10px"}}>{subText}</p>
+                (
+                <p style={{fontSize:"1vw",color:"lightgray",marginLeft:"10px"}}>{title === "Date of Birth"  ? date : subText}</p>
                 )
-                
               } />
           </ListItem>  
         )
@@ -150,7 +132,7 @@ const ListItems=(title:string,subText:string,idX:number,country:any)=>{
     
     if( index > (number.start) && index < (number.end) ){
         
-    return  ListItems(list?.primaryText,list?.secondaryText,index,country);
+    return  ListItems(list?.primaryText,list?.secondaryText,index);
 
 
  }

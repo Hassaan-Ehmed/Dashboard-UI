@@ -41,8 +41,8 @@ function ActionBtn() {
   </>
 
 ) : (
-
-  <Button variant="contained" color="success" sx={{width:"27%",fontWeight:"bold",bgcolor:"#A61B30", display:"flex",justifyContent:"center",gap:"1vw",alignItems:"center",color:"white",":hover ":{
+  
+  <Button variant="contained" color="success" sx={{width:"5.5vw",fontWeight:"bold",bgcolor:"#A61B30", display:"flex",justifyContent:"center",gap:"1vw",alignItems:"center",color:"white",":hover ":{
     bgcolor:"#A61B30"
 }}}
 
